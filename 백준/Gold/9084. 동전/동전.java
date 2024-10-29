@@ -24,6 +24,8 @@ public class Main{
     //                    -> 50 0 10*10 
     //                    -> 50 1 -> 50원을 만들기 -> 50 o
     //                                            -> 50 x
+
+    // Solved by Dp Algorith
     public static void main(String[] arg) throws IOException
     {
         int t = sc.nextInt();
