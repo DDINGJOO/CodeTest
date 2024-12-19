@@ -2,35 +2,27 @@ import java.util.*;
 
 class Solution {
     boolean solution(String s) {
-        Stack<Integer> st = new Stack<>();
-        for(char ch : s.toCharArray())
+     
+        int answer = 0;
+        
+        for(char i : s.toCharArray())
         {
-            if(ch == '(')
+            if(i == '(')
             {
-                st.push(1);
+                answer++;
             }
-            
-            else if(st.isEmpty())
+            else if(answer >0)
+            {
+                answer--;
+            }
+            else
             {
                 return false;
             }
-            
-            else
-            {
-                st.pop();
-            }
-            
         }
         
+        return (answer == 0);
+            
         
-        if(st.isEmpty())
-        {
-            return true;
-        } 
-        else
-        {
-            return false;
-        }
     }
-    
 }
