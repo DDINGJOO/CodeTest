@@ -50,7 +50,7 @@ class Solution
         }
         
         
-        return st.size()==0 ? 1:0;
+        return st.isEmpty() ? 1:0;
     
     }
 }
