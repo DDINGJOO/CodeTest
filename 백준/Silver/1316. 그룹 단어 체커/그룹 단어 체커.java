@@ -12,6 +12,7 @@
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Main{
     
@@ -21,14 +22,17 @@ public class Main{
 
     static int n;
     static int result =0; 
+    public static void main(String[] args) {
+        solve1(args);
+    }
     
-    public static void main (String[] args)
+    public static void solve1(String[] args)
     {
         try{
             n= Integer.parseInt(br.readLine());
             for(int i =0 ; i<n ; i++){
                 String input = br.readLine();
-                if(isGroupWord(input) == true){
+                if(isGroupWordForSolve1(input)){
                     result++;
                 }
             }
@@ -37,10 +41,42 @@ public class Main{
 
         System.out.println(result);
     }
-            
-    
 
-    public static boolean isGroupWord(String str)
+
+            
+    public static void solve2(String[] args) {
+        try {
+            n = Integer.parseInt(br.readLine());
+
+            Predicate<String> isGroupWord = (str) -> {
+                HashSet<Character> hashSet = new HashSet<>();
+                char prevChar = str.charAt(0);
+                hashSet.add(prevChar);
+
+                for (int i = 1; i < str.length(); i++) {
+                    char currentChar = str.charAt(i);
+                    if (currentChar != prevChar) {
+                        if (hashSet.contains(currentChar)) {
+                            return false;
+                        }
+                        hashSet.add(currentChar);
+                    }
+                    prevChar = currentChar;
+                }
+                return true;
+            };
+            for (int i = 0; i < n; i++) {
+                if (isGroupWord.test(br.readLine())) {
+                    result++;
+                }
+            }
+
+            System.out.println(result);
+        } catch (IOException e) {
+            System.out.println("IOException occurred");
+        }
+    }
+    public static boolean isGroupWordForSolve1(String str)
     {
         HashSet<Character> hashSet = new HashSet<>(); 
         char prevChar = str.charAt(0);
