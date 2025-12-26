@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/11723. 집합" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1316. 그룹 단어 체커" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1326. 폴짝폴짝" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1535. 안녕" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18126. 너구리 구구" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1920. 수 찾기" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1929. 소수 구하기" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/22971. 증가하는 부분 수열의 개수" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2468. 안전 영역" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2941. 크로아티아 알파벳" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

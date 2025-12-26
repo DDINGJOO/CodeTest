@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/10797. 10부제" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/10798. 세로읽기" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/11050. 이항 계수 1" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/11382. 꼬마 정민" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2292. 벌집" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/23971. ZOAC 4" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2506. 점수계산" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2566. 최댓값" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/5073. 삼각형과 세 변" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
