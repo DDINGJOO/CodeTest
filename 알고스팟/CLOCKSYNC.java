@@ -1,6 +1,6 @@
 package 알고스팟;
 
-  class Solution {
+  class CLOCKSYNC {
       private static final int INF = 1_000_000_000;
 
       private final int[][] mapper = {
