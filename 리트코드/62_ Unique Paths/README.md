@@ -104,9 +104,6 @@ class Solution {
 
 하지만 LeetCode에서는 결국 Time Limit Exceeded가 났다.
 
-여기에 시간초과 스크린샷을 넣으면 흐름이 더 자연스럽다.
-
-`[Time Limit Exceeded 스크린샷 삽입]`
 
 ## 4. 왜 시간 초과가 났는가
 
