@@ -1,82 +1,105 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
+
+/*
+    과도한 객체지향과 함수형 프로그래밍 연습도 겸사겸사.. 한거라.. 억지스러운 부분들이 있는거 알아욤...
+ */
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        AnagramFinder anagramFinder = new AnagramFinder(s, p);
-        return anagramFinder.findAllStartIndexes();
-    }
-
-    private static final class AnagramFinder {
-        private static final int ALPHABET_SIZE = 26;
-
-        private final String sourceText;
-        private final int[] remainingLetters;
-        private final int patternLength;
-        private int remainingMatchCount;
-        private int windowStart;
-
-        private AnagramFinder(String sourceText, String pattern) {
-            this.sourceText = sourceText;
-            this.remainingLetters = new int[ALPHABET_SIZE];
-            this.patternLength = pattern.length();
-            this.remainingMatchCount = pattern.length();
-            initializePatternFrequency(pattern);
+        if (p.length() > s.length()) {
+            return List.of();
         }
 
-        private List<Integer> findAllStartIndexes() {
-            List<Integer> startIndexes = new ArrayList<>();
-            if (patternLength > sourceText.length()) {
-                return startIndexes;
+        return IntStream.range(0, s.length())
+                .collect(
+                        () -> SlidingAnagramCollector.from(s, p),
+                        SlidingAnagramCollector::accumulate,
+                        SlidingAnagramCollector::combine
+                )
+                .startIndexes();
+    }
+
+    private static final class SlidingAnagramCollector {
+        private static final int ALPHABET_SIZE = 26;
+
+        private final String text;
+        private final int[] neededByLetter;
+        private final int windowLength;
+        private final List<Integer> startIndexes;
+        private int missingLetterCount;
+        private int windowLeft;
+
+        private SlidingAnagramCollector(String text, String pattern) {
+            this.text = text;
+            this.neededByLetter = new int[ALPHABET_SIZE];
+            this.windowLength = pattern.length();
+            this.startIndexes = new ArrayList<>();
+            this.missingLetterCount = pattern.length();
+            pattern.chars().forEach(this::addNeededLetter);
+        }
+
+        private static SlidingAnagramCollector from(String text, String pattern) {
+            return new SlidingAnagramCollector(text, pattern);
+        }
+
+        private void accumulate(int windowRight) {
+            include(text.charAt(windowRight));
+            shrinkWindowIfNeeded(windowRight);
+            if (isAnagramWindow(windowRight)) {
+                startIndexes.add(startIndexAt(windowRight));
             }
+        }
 
-            for (int windowEnd = 0; windowEnd < sourceText.length(); windowEnd++) {
-                include(sourceText.charAt(windowEnd));
+        private int startIndexAt(int windowRight) {
+            return windowRight - windowLength + 1;
+        }
 
-                if (windowSize(windowEnd) > patternLength) {
-                    exclude(sourceText.charAt(windowStart));
-                    windowStart++;
-                }
-
-                if (isPerfectAnagramWindow(windowEnd)) {
-                    startIndexes.add(windowStart);
-                }
-            }
-
+        private List<Integer> startIndexes() {
             return startIndexes;
         }
 
-        private void initializePatternFrequency(String pattern) {
-            for (int index = 0; index < pattern.length(); index++) {
-                remainingLetters[toAlphabetIndex(pattern.charAt(index))]++;
-            }
+        private void addNeededLetter(int letter) {
+            neededByLetter[toLetterIndex(letter)]++;
         }
 
         private void include(char letter) {
-            int alphabetIndex = toAlphabetIndex(letter);
-            if (remainingLetters[alphabetIndex] > 0) {
-                remainingMatchCount--;
+            int letterIndex = toLetterIndex(letter);
+            if (neededByLetter[letterIndex] > 0) {
+                missingLetterCount--;
             }
-            remainingLetters[alphabetIndex]--;
+            neededByLetter[letterIndex]--;
+        }
+
+        private void shrinkWindowIfNeeded(int windowRight) {
+            if (currentWindowLength(windowRight) > windowLength) {
+                exclude(text.charAt(windowLeft));
+                windowLeft++;
+            }
         }
 
         private void exclude(char letter) {
-            int alphabetIndex = toAlphabetIndex(letter);
-            if (remainingLetters[alphabetIndex] >= 0) {
-                remainingMatchCount++;
+            int letterIndex = toLetterIndex(letter);
+            if (neededByLetter[letterIndex] >= 0) {
+                missingLetterCount++;
             }
-            remainingLetters[alphabetIndex]++;
+            neededByLetter[letterIndex]++;
         }
 
-        private boolean isPerfectAnagramWindow(int windowEnd) {
-            return remainingMatchCount == 0 && windowSize(windowEnd) == patternLength;
+        private boolean isAnagramWindow(int windowRight) {
+            return missingLetterCount == 0 && currentWindowLength(windowRight) == windowLength;
         }
 
-        private int windowSize(int windowEnd) {
-            return windowEnd - windowStart + 1;
+        private void combine(SlidingAnagramCollector ignored) {
+            throw new UnsupportedOperationException("지원하지 않습니다.(그냥 만들어 봤음요)");
         }
 
-        private int toAlphabetIndex(char letter) {
+        private int currentWindowLength(int windowRight) {
+            return windowRight - windowLeft + 1;
+        }
+
+        private int toLetterIndex(int letter) {
             return letter - 'a';
         }
     }
