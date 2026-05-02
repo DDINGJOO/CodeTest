@@ -1,5 +1,3 @@
-import javax.swing.tree.TreeNode;
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -23,7 +21,7 @@ class Solution {
         }
 
         TreeNode root = new TreeNode(postorder[n - 1]);
-        ArrayDeque<TreeNode> spine = new java.util.ArrayDeque<>();
+        ArrayDeque<TreeNode> spine = new ArrayDeque<>();
         spine.push(root);
 
         int inorderIndex = n - 1;
